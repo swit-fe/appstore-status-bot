@@ -3,6 +3,7 @@ require "json"
 require 'tempfile'
 
 def get_app_state(app)
+  puts 'get_app_state'
   
   edit_version_info = app.get_edit_app_store_version
   in_review_version_info = app.get_in_review_app_store_version
@@ -46,12 +47,14 @@ def get_app_state(app)
 end
 
 def get_app_version_from(bundle_id) 
+  puts 'get_app_version_from'
   apps = []
   if bundle_id
     apps.push(Spaceship::ConnectAPI::App.find(bundle_id))
   else 
     apps = Spaceship::ConnectAPI::App.all
   end 
+  puts apps
   apps.compact.map { |app| get_app_state(app) }
 end 
 
@@ -71,7 +74,7 @@ token = Spaceship::ConnectAPI::Token.create(
   filepath: File.absolute_path(p8_file.path)
 )
 
-
+puts token
 Spaceship::ConnectAPI.token = token 
 
 bundle_id_array = bundle_id.to_s.split(",")
@@ -80,6 +83,7 @@ if bundle_id_array.length.zero?
   versions += get_app_version_from(nil)
 else 
   bundle_id_array.each do |bundle_id|
+    puts bundle_id
     versions += get_app_version_from(bundle_id)
   end  
 end
