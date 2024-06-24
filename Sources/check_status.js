@@ -15,6 +15,7 @@ const main = async () => {
     "ruby Sources/fetch_app_status.rb",
     { env: env },
     function (err, stdout, stderr) {
+      console.log(err, stdout, stderr);
       if (stdout) {
         var apps = JSON.parse(stdout);
         console.log(apps);
