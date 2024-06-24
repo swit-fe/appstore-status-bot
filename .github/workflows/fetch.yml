@@ -30,3 +30,4 @@ jobs:
           BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_ID: ${{ secrets.GIST_ID }}
+          SPACESHIP_DEBUG: true
