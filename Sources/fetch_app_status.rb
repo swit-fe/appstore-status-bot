@@ -58,6 +58,7 @@ def get_app_version_from(bundle_id)
   apps.compact.map { |app| get_app_state(app) }
 end 
 
+puts 'env: ' JSON.dump ENV
 
 # Create temp file. 
 p8 = ENV['PRIVATE_KEY']
@@ -74,7 +75,7 @@ token = Spaceship::ConnectAPI::Token.create(
   filepath: File.absolute_path(p8_file.path)
 )
 
-puts token
+puts 'token: ' token
 Spaceship::ConnectAPI.token = token 
 
 bundle_id_array = bundle_id.to_s.split(",")
@@ -83,7 +84,7 @@ if bundle_id_array.length.zero?
   versions += get_app_version_from(nil)
 else 
   bundle_id_array.each do |bundle_id|
-    puts bundle_id
+    puts 'bundle_id: ' bundle_id
     versions += get_app_version_from(bundle_id)
   end  
 end
